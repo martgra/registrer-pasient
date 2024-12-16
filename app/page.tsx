@@ -47,8 +47,13 @@ export default function Home() {
 
       setSuccess(true);
       setPersonnummer('');
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        // If it's not an instance of Error, provide a fallback message.
+        setError('Noe gikk galt ved innsjekking.');
+      }
     }
   };
 
