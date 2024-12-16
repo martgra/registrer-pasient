@@ -1,0 +1,25 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node
+{
+	"name": "Node.js & TypeScript",
+	"image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm",
+	"postCreateCommand": "npm install",
+	"customizations": {
+		"vscode": {
+		  "settings": {
+			"terminal.integrated.defaultProfile.linux": "zsh",
+			"terminal.integrated.profiles.linux": {
+			  "zsh": { "path": "/usr/bin/zsh" }
+			}
+		  },
+		  "extensions": [
+			"eamodio.gitlens",
+			"mhutchie.git-graph",
+			"Gruntfuggly.todo-tree",
+			"esbenp.prettier-vscode",
+			"streetsidesoftware.code-spell-checker",
+			"streetsidesoftware.code-spell-checker-norwegian-bokmal"
+		  ]
+		}
+	  }
+}
