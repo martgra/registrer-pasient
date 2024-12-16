@@ -15,6 +15,7 @@ export default function Keypad({ onKeyPress, onDelete, onConfirm }: KeypadProps)
         {digits.map((digit) => (
           <button
             key={digit}
+            data-testid={`digit-${digit}`}
             onClick={() => onKeyPress(digit)}
             type="button"
             className="
@@ -33,6 +34,7 @@ export default function Keypad({ onKeyPress, onDelete, onConfirm }: KeypadProps)
       </div>
       <div className="flex w-full gap-2 justify-center mt-2">
         <button
+          data-testid="delete-button"
           className="
             w-32 h-20 
             bg-yellow-200 dark:bg-yellow-600 
@@ -48,6 +50,7 @@ export default function Keypad({ onKeyPress, onDelete, onConfirm }: KeypadProps)
           Delete
         </button>
         <button
+          data-testid="confirm-button"
           className="
             w-32 h-20 
             bg-green-200 dark:bg-green-600 

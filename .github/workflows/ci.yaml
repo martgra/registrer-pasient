@@ -1,8 +1,9 @@
-name: CI
+name: "CI: Run checks before merge"
 
 on:
   pull_request:
     branches: [main]
+  workflow_dispatch:
 
 jobs:
   build-and-test:
@@ -26,12 +27,9 @@ jobs:
         run: npm run lint
         
       - name: Run tests
-        run: npm test
+        run: CI=true npm test
 
       - name: Build application
         run: npm run build
-
-      - name: Type check
-        run: npm run type-check
 
 

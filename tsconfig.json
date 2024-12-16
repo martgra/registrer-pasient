@@ -17,6 +17,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "types": ["vitest/globals", "vitest-dom/extend-expect"],
     "plugins": [
       {
         "name": "next"
@@ -33,7 +34,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "next-env.d.ts",
-    "build/types/**/*.ts"
+    "build/types/**/*.ts",
+    "vitest.setup.ts"
   ],
   "exclude": [
     "node_modules"
