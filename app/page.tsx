@@ -1,36 +1,33 @@
-"use client";
+'use client'
 
-import React, { useState } from 'react';
-import Keypad from '@/components/keypad';
-import { idnr  } from '@navikt/fnrvalidator'
-
+import React, { useState } from 'react'
+import Keypad from '@/components/keypad'
+import { idnr } from '@navikt/fnrvalidator'
 
 export default function Home() {
-  const [personnummer, setPersonnummer] = useState<string>('');
-  const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<boolean>(false);
-
-
+  const [personnummer, setPersonnummer] = useState<string>('')
+  const [error, setError] = useState<string | null>(null)
+  const [success, setSuccess] = useState<boolean>(false)
 
   const handleKeyPress = (digit: string) => {
-    setError(null);
-    setSuccess(false);
+    setError(null)
+    setSuccess(false)
     if (personnummer.length < 11) {
-      setPersonnummer(personnummer + digit);
+      setPersonnummer(personnummer + digit)
     }
-  };
+  }
 
   const handleDelete = () => {
-    setPersonnummer(personnummer.slice(0, -1));
-  };
+    setPersonnummer(personnummer.slice(0, -1))
+  }
 
   const handleConfirm = async () => {
-    setError(null);
-    setSuccess(false);
+    setError(null)
+    setSuccess(false)
 
-    if (idnr(personnummer).status == "invalid") {
-      setError("Ugyldig personnummer.");
-      return;
+    if (idnr(personnummer).status == 'invalid') {
+      setError('Ugyldig personnummer.')
+      return
     }
 
     try {
@@ -38,24 +35,24 @@ export default function Home() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ personnummer })
-      });
+      })
 
       if (!res.ok) {
-        const data = await res.json() as { message?: string };
-        throw new Error(data.message || 'Noe gikk galt ved innsjekking.');
+        const data = (await res.json()) as { message?: string }
+        throw new Error(data.message || 'Noe gikk galt ved innsjekking.')
       }
 
-      setSuccess(true);
-      setPersonnummer('');
+      setSuccess(true)
+      setPersonnummer('')
     } catch (err: unknown) {
       if (err instanceof Error) {
-        setError(err.message);
+        setError(err.message)
       } else {
         // If it's not an instance of Error, provide a fallback message.
-        setError('Noe gikk galt ved innsjekking.');
+        setError('Noe gikk galt ved innsjekking.')
       }
     }
-  };
+  }
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-50 dark:bg-gray-900 p-4 transition-colors duration-300">
@@ -75,5 +72,5 @@ export default function Home() {
 
       <Keypad onKeyPress={handleKeyPress} onDelete={handleDelete} onConfirm={handleConfirm} />
     </div>
-  );
+  )
 }

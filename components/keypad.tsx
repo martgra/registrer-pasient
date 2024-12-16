@@ -1,18 +1,18 @@
-import React from 'react';
+import React from 'react'
 
 interface KeypadProps {
-  onKeyPress: (digit: string) => void;
-  onDelete: () => void;
-  onConfirm: () => void;
+  onKeyPress: (digit: string) => void
+  onDelete: () => void
+  onConfirm: () => void
 }
 
-const digits = ['1','2','3','4','5','6','7','8','9','0'];
+const digits = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
 
 export default function Keypad({ onKeyPress, onDelete, onConfirm }: KeypadProps) {
   return (
     <div className="flex flex-wrap w-72 justify-center gap-2">
       <div className="flex flex-wrap gap-2 justify-center w-full">
-        {digits.map((digit) => (
+        {digits.map(digit => (
           <button
             key={digit}
             data-testid={`digit-${digit}`}
@@ -67,5 +67,5 @@ export default function Keypad({ onKeyPress, onDelete, onConfirm }: KeypadProps)
         </button>
       </div>
     </div>
-  );
+  )
 }
