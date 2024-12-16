@@ -2,15 +2,15 @@
 
 import React, { useState } from 'react';
 import Keypad from '@/components/keypad';
+import { idnr  } from '@navikt/fnrvalidator'
+
 
 export default function Home() {
   const [personnummer, setPersonnummer] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<boolean>(false);
 
-  const isPersonnummerValid = (pnr: string): boolean => {
-    return /^\d{11}$/.test(pnr);
-  };
+
 
   const handleKeyPress = (digit: string) => {
     setError(null);
@@ -28,8 +28,8 @@ export default function Home() {
     setError(null);
     setSuccess(false);
 
-    if (!isPersonnummerValid(personnummer)) {
-      setError("Ugyldig personnummer. Vennligst sjekk at du har skrevet 11 siffer.");
+    if (idnr(personnummer).status == "invalid") {
+      setError("Ugyldig personnummer.");
       return;
     }
 
